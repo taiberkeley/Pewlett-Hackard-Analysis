@@ -24,3 +24,12 @@ Second step was to create a query using SQL/PgAdmin in order to create tables fo
 	FOREIGN KEY (dept_no) REFERENCES departments (dept_no),
     	PRIMARY KEY (emp_no, dept_no)
 	);
+
+With all the tables created I was able to import the csv files and identify the number of employess that were retiring, according to the range of date that was specified by the company:
+
+	SELECT COUNT(first_name)
+	FROM employees
+	WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
+	AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
+
+
