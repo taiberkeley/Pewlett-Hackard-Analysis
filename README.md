@@ -39,3 +39,32 @@ With that query I was able to conclude that 41,380 employees borned and hired wi
 	FROM employees
 	WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 	AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
+
+create a separate list of employees for each department. so we'll need to start combining it in different ways using joins.
+The list Bobby provided was big and difficult to absorb as one large file. More than 40,000 employees? Retiring around the same time? Yeah, that's a lot.
+
+Bobby will need to break down that large list into smaller pieces, then present those to his boss instead
+What we'll need to help Bobby do first is recreate the retirement_info table so it includes the emp_no column. With this column in place, we'll be able to join our new table full of future retirees to the Dept_Emp table, so we know which departments will have job openings (and how many).
+
+	-- Create new table for retiring employees
+	SELECT emp_no, first_name, last_name
+	INTO retirement_info
+	FROM employees
+	WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
+	AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
+	-- Check the table
+	SELECT * FROM retirement_info;
+	
+After executing this code, the retirement_info table that's generated now includes the emp_no column. We are ready to begin combining different tables using joins to help Bobby create the new list his boss has requested.
+Use Left Join to Capture retirement-info Tabl
+
+	-- Joining retirement_info and dept_emp tables
+	SELECT retirement_info.emp_no,
+    	retirement_info.first_name,
+	retirement_info.last_name,
+   	 dept_emp.to_date
+	FROM retirement_info
+	LEFT JOIN dept_emp
+	ON retirement_info.emp_no = dept_emp.emp_no;
+	
+	
