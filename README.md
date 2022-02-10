@@ -57,6 +57,7 @@ What we'll need to help Bobby do first is recreate the retirement_info table so 
 	
 After executing this code, the retirement_info table that's generated now includes the emp_no column. We are ready to begin combining different tables using joins to help Bobby create the new list his boss has requested.
 Use Left Join to Capture retirement-info Tabl
+Now that we have a list of all retirement-eligible employees, it's important to make sure that they are actually still employed with PH. To do so, we're going to perform another join, this time between the retirement_info and dept_emp tables.
 
 	-- Joining retirement_info and dept_emp tables
 	SELECT ri.emp_no,
@@ -67,6 +68,9 @@ Use Left Join to Capture retirement-info Tabl
 	FROM retirement_info as ri
 	LEFT JOIN dept_emp as de
 	ON ri.emp_no = de.emp_no
-	
+	WHERE de.to_date = ('9999-01-01');
+
+But before he's able to hand that list over, he'll need to use COUNT and GROUP BY with joins to separate the employees into their departments. 
+
 	
 	
